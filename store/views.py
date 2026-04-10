@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import Product
+from .forms import ProductForm
 
 # -----------------------------
 # Public pages
@@ -66,18 +68,36 @@ def is_staff_user(user):
 
 @user_passes_test(is_staff_user)
 def add_product(request):
-    # TODO: Implement product creation form
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('store_page')
+    else:
+        form = ProductForm()
     return render(request, 'store/add_product.html')
 
 @user_passes_test(is_staff_user)
 def edit_product(request, product_id):
-    # TODO: Implement product edit form
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('store_page')
+    else:
+        form = ProductForm(instance=product)
     return render(request, 'store/edit_product.html', {'product_id': product_id})
 
 @user_passes_test(is_staff_user)
 def delete_product(request, product_id):
-    # TODO: Implement product deletion
-    return redirect('store_page')
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == 'POST':
+        product.delete()
+        return redirect('store_page')
+    return render(request, 'store/delete_product.html', {'product': product})
 
 @user_passes_test(is_staff_user)
 def add_event(request):
