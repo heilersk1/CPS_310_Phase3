@@ -1,3 +1,5 @@
+{% extends 'store/base.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +28,11 @@
                     <p><strong>Price:</strong> ${{ product.price }}</p>
                     <p><strong>Stock:</strong> {{ product.quantity }}</p>
 
-                    <!-- Staff actions -->
-                    <a href="{% url 'edit_product' product.id %}">Edit</a>
-                    |
-                    <a href="{% url 'delete_product' product.id %}">Delete</a>
+                    {% if user.is_authenticated and user.is_staff %}
+                        <a href="{% url 'admin:store_product_change' product.id %}">Edit</a>
+                        |
+                        <a href="{% url 'admin:store_product_delete' product.id %}">Delete</a>
+                    {% endif %}
 
                 </div>
             {% endfor %}
@@ -40,3 +43,4 @@
     </main>
 </body>
 </html>
+{% endblock %}
