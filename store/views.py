@@ -11,7 +11,8 @@ def home(request):
     return render(request, 'store/home.html')
 
 def store_page(request):
-    return render(request, 'store/store.html')
+    products = Product.objects.all()
+    return render(request, 'store/store.html', {'products': products})
 
 def events_page(request):
     return render(request, 'store/events.html')
