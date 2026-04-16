@@ -11,14 +11,16 @@ body {
     align-items: center;
     background: linear-gradient(to right, #728063, #9CAF88);
     padding: 15px 25px;
-}
 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
 /* NAV LINKS */
 .navbar a {
     color: #FFF6EA;
     text-decoration: none;
-    margin-left: 15px;
+    margin-left: 20px;
     font-weight: bold;
+    transition: all 0.2s ease;
 }
 
 /* HOVER EFFECT */
@@ -29,4 +31,17 @@ body {
 /* BRAND TEXT */
 .brand {
     font-size: 22px;
+}
+
+.content {
+    padding: 30px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }

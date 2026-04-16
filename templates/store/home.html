@@ -2,24 +2,9 @@
 
 {% block content %}
 
-<header>
+<header style = "text-align:center; margin-top:30px;">
     <h1>Welcome to Our Toy Store!</h1>
     <p>We have fun toys for kids of all ages</p>
 </header>
-
-<div class="buttons">
-    <a href="{% url 'store_page' %}"><button>Visit Store</button></a>
-    <a href="{% url 'events_page' %}"><button>Events</button></a>
-</div>
-
-<div style="text-align:center; margin-top:20px;">
-    <a href="{% url 'login' %}">
-        <button style="padding:10px 20px;">Customer Login</button>
-    </a>
-
-    <a href="{% url 'admin:index' %}">
-        <button style="padding:10px 20px;">Admin Login</button>
-    </a>
-</div>
 
 {% endblock %}
