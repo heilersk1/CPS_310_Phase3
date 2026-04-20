@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Product
+from .models import Product, Event
 from .forms import ProductForm
 
 # -----------------------------
@@ -15,7 +15,8 @@ def store_page(request):
     return render(request, 'store/store.html', {'products': products})
 
 def events_page(request):
-    return render(request, 'store/events.html')
+    events = Event.objects.all()
+    return render(request, 'store/events.html', {'events': events})
 
 # -----------------------------
 # Login / Logout
