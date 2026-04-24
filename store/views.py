@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Product, Event
+from .models import Product, Event, Feedback
 from .forms import ProductForm
 
 # -----------------------------
@@ -17,6 +17,14 @@ def store_page(request):
 def events_page(request):
     events = Event.objects.all()
     return render(request, 'store/events.html', {'events': events})
+
+def feedback_page(request):
+    feedback = Feedback.objects.all()
+    return render(request, 'store/feedback-form.html', {'feedback' : feedback})
+
+def jobs_page(request):
+    events = Event.objects.all()
+    return render(request, 'store/job-postings.html', {'events' : events})
 
 # -----------------------------
 # Login / Logout

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product, Event
+from .models import Product, Event, Feedback
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -10,3 +10,8 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['name', 'description', 'date', 'time', 'price']
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['name', 'comments']

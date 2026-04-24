@@ -14,6 +14,8 @@
         <div class="nav-left">
             <a href="{% url 'store_page' %}" class="brand">Our Products</a>
             <a href="{% url 'events_page' %}" class="brand">Our Events</a>
+            <a href="{% url 'feedback_form' %}" class="brand">Feedback Form</a>
+            <a href="{% url 'job_postings' %}" class="brand">Job Postings</a>
         </div>
 
         <div class="nav-right">
@@ -26,6 +28,7 @@
             {% endif %}
 
             <a href="{% url 'admin:index' %}">Admin</a>
+            <a href="{% url 'employee_login' %}">Employees Only</a>
         </div>
     </nav>
 

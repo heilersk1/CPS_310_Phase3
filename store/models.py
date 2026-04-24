@@ -19,3 +19,10 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Feedback(models.Model):
+    name = models.TextField()
+    comments = models.TextField()
+    
+    def __str__(self):
+        return self.name
