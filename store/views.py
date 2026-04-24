@@ -20,11 +20,11 @@ def events_page(request):
 
 def feedback_page(request):
     feedback = Feedback.objects.all()
-    return render(request, 'store/feedback-form.html', {'feedback' : feedback})
+    return render(request, 'store/feedback_form.html', {'feedback' : feedback})
 
 def jobs_page(request):
     events = Event.objects.all()
-    return render(request, 'store/job-postings.html', {'events' : events})
+    return render(request, 'store/job_postings.html', {'events' : events})
 
 # -----------------------------
 # Login / Logout
