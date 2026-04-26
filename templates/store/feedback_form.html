@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Feedback</title>
-</head>
-<body>
+{% extends 'store/base.html' %}
+{% block content %}
     <h1>Feedback Page</h1>
+    <form method="POST">
+        {% csrf_token %}
 
+        <label for="name">Name:</label></br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="comments">Comments:</label><br>
+        <textarea id="comments" name="comments" rows="10" required></textarea><br>
+
+        <button type = "submit">Submit Feedback</button>
+    </form>
     <h2>All Feedback</h2>
     <ul>
         {% for item in feedback %}
@@ -16,5 +22,4 @@
             <li>No feedback yet.</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

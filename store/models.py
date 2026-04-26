@@ -26,3 +26,9 @@ class Feedback(models.Model):
     
     def __str__(self):
         return self.name
+
+class Job(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    date = models.DateField(auto_now_add=True)
+    deadline = models.DateField()
