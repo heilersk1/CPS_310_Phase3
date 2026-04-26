@@ -1,25 +1,188 @@
 {% extends 'store/base.html' %}
 {% block content %}
-    <h1>Feedback Page</h1>
-    <form method="POST">
-        {% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Toy Store Feedback</title>
 
-        <label for="name">Name:</label></br>
-        <input type="text" id="name" name="name" required><br><br>
+<style>
+    body {
+        font-family: Arial;
+        background-color: #f4f4f4;
+    }
 
-        <label for="comments">Comments:</label><br>
-        <textarea id="comments" name="comments" rows="10" required></textarea><br>
+    .container {
+        width: 500px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
 
-        <button type = "submit">Submit Feedback</button>
-    </form>
-    <h2>All Feedback</h2>
-    <ul>
-        {% for item in feedback %}
-            <li>
-                {{ item.name }}: {{ item.comments }}
-            </li>
-        {% empty %}
-            <li>No feedback yet.</li>
-        {% endfor %}
-    </ul>
+    h2, h3 {
+        text-align: center;
+    }
+
+    input, textarea, select, button {
+        width: 100%;
+        margin: 8px 0;
+        padding: 8px;
+    }
+
+    .section {
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 1px solid #ccc;
+    }
+
+    .toyEntry {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 0.9;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Toy Store Feedback Form</h2>
+
+<form id="feedbackForm">
+
+    <!-- Customer Info -->
+    <div class="section">
+        <h3>Customer Info</h3>
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+    </div>
+
+    <!-- Employee Interaction -->
+    <div class="section">
+        <h3>Employee Interaction</h3>
+        <select id="employeeRating">
+            <option>5 - Excellent</option>
+            <option>4 - Good</option>
+            <option>3 - Average</option>
+            <option>2 - Poor</option>
+            <option>1 - Bad</option>
+        </select>
+        <textarea id="employeeComments" placeholder="Comments about staff..."></textarea>
+    </div>
+
+    <!-- Finding Items -->
+    <div class="section">
+        <h3>Finding Items</h3>
+        <select id="findingRating">
+            <option>5 - Very Easy</option>
+            <option>4 - Easy</option>
+            <option>3 - Neutral</option>
+            <option>2 - Difficult</option>
+            <option>1 - Very Difficult</option>
+        </select>
+    </div>
+
+    <!-- Payment Experience -->
+    <div class="section">
+        <h3>Payment Experience</h3>
+        <select id="paymentRating">
+            <option>5 - Very Smooth</option>
+            <option>4 - Smooth</option>
+            <option>3 - Average</option>
+            <option>2 - Slow</option>
+            <option>1 - Problematic</option>
+        </select>
+    </div>
+
+    <!-- Online Store -->
+    <div class="section">
+        <h3>Online Store Feedback</h3>
+        <textarea id="onlineFeedback" placeholder="Comments about website/app..."></textarea>
+    </div>
+
+    <!-- MULTIPLE TOY REVIEWS -->
+    <div class="section">
+        <h3>Toy Reviews</h3>
+
+        <div id="toyContainer">
+            <div class="toyEntry">
+                <input type="text" placeholder="Toy Name" class="toyName">
+
+                <select class="toyRating">
+                    <option>5 - Excellent</option>
+                    <option>4 - Good</option>
+                    <option>3 - Average</option>
+                    <option>2 - Poor</option>
+                    <option>1 - Bad</option>
+                </select>
+
+                <textarea placeholder="Toy comments..." class="toyComments"></textarea>
+            </div>
+        </div>
+
+        <button type="button" onclick="addToy()">+ Add Another Toy</button>
+    </div>
+
+    <button type="submit">Submit Feedback</button>
+
+</form>
+</div>
+
+<script>
+function addToy() {
+    let container = document.getElementById("toyContainer");
+
+    let newToy = document.createElement("div");
+    newToy.classList.add("toyEntry");
+
+    newToy.innerHTML = `
+        <input type="text" placeholder="Toy Name" class="toyName">
+
+        <select class="toyRating">
+            <option>5 - Excellent</option>
+            <option>4 - Good</option>
+            <option>3 - Average</option>
+            <option>2 - Poor</option>
+            <option>1 - Bad</option>
+        </select>
+
+        <textarea placeholder="Toy comments..." class="toyComments"></textarea>
+    `;
+
+    container.appendChild(newToy);
+}
+
+document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let toys = [];
+
+    document.querySelectorAll(".toyEntry").forEach(entry => {
+        let name = entry.querySelector(".toyName").value;
+        let rating = entry.querySelector(".toyRating").value;
+        let comments = entry.querySelector(".toyComments").value;
+
+        toys.push({ name, rating, comments });
+    });
+
+    console.log("Toy Reviews:", toys);
+
+    alert("Feedback submitted successfully!");
+});
+</script>
+
+</body>
 {% endblock %}
